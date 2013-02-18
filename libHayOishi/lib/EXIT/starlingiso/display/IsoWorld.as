@@ -66,6 +66,13 @@ package EXIT.starlingiso.display
 		{
 			interactController.deactive();	
 		}		
+		
+		public function updateWindowSize(_windowWidth:Number,_windowHeight:Number):void
+		{
+			touchDummy.width = _windowWidth;
+			touchDummy.height = _windowHeight;
+			interactController.updateWindow(_windowWidth,_windowHeight);
+		}
 		 
 		/**
 		 * DEBUG 

@@ -22,7 +22,7 @@ package com.oishigroup
 	public class MainApp extends Sprite
 	{
 
-		private var starlingMain:Starling;
+		protected var starlingMain:Starling;
 		private var mainGameClass:Class;
 		public function MainApp()
 		{

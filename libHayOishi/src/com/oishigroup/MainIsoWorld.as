@@ -10,7 +10,7 @@ package com.oishigroup
 	{
 		public function MainIsoWorld( _interactController:BaseInteractController, _isDebug:Boolean=true)
 		{
-			var worldData:WorldData = new WorldData(20,50,128,MetaData.stageWidth,MetaData.stageHeight, 0 , 0 );
+			var worldData:WorldData = new WorldData(10,10,128,MetaData.stageWidth,MetaData.stageHeight, 0 , 0 );
 			super(worldData, _interactController, _isDebug);
 		}
 	}

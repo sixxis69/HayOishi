@@ -20,8 +20,8 @@ package EXIT.starlingiso.display
 		protected var worldContainer:DisplayObject;
 		protected var halfWorldWidth:Number;
 		protected var halfWorldHeight:Number;
-		protected var widowWidth:Number;
-		protected var widowHeight:Number;
+		protected var windowWidth:Number;
+		protected var windowHeight:Number;
 		protected var touchComposer:TouchComposer;
 		
 		// positionvariable 
@@ -32,6 +32,8 @@ package EXIT.starlingiso.display
 		protected var lastTime:Number = 0;
 		protected var speedX:Number = 0;
 		protected var speedY:Number = 0;
+		protected var canMoveX:Boolean = true;
+		protected var canMoveY:Boolean = true;
 		
 		// zoom variable
 		protected var _zoom:Number = 1;
@@ -48,8 +50,7 @@ package EXIT.starlingiso.display
 			worldContainer = _isoWold.worldContainer;
 			halfWorldWidth = _isoWold.worldData.worldWidth*.5;
 			halfWorldHeight = _isoWold.worldData.worldHeight*.5;
-			widowWidth = _isoWold.worldData.windowWidth;
-			widowHeight = _isoWold.worldData.windowHeight;
+			updateWindow(_isoWold.worldData.windowWidth,_isoWold.worldData.windowHeight);
 			
 			touchComposer = new TouchComposer(touchDummy);
 			
@@ -73,6 +74,49 @@ package EXIT.starlingiso.display
 			touchComposer.mouseMove(null);
 		}
 		
+		public function updateWindow(_windowWidth:Number,_windowHeight:Number):void
+		{
+			windowWidth = _windowWidth;
+			windowHeight = _windowHeight;
+			
+			checkCanMove();
+			if(canMoveX){
+				if( worldContainer.x-halfWorldWidth*_zoom > 0 ){
+					worldContainer.x = halfWorldWidth*_zoom;
+				}else if( worldContainer.x+halfWorldWidth*_zoom < windowWidth ){
+					worldContainer.x = windowWidth-halfWorldWidth*_zoom;
+				}
+			}
+			
+			if( canMoveY ){
+				if( worldContainer.y-halfWorldHeight*_zoom > 0 ){
+					worldContainer.y = halfWorldHeight*_zoom;
+				}else if( worldContainer.y+halfWorldHeight*_zoom < windowHeight ){
+					worldContainer.y = windowHeight-halfWorldHeight*_zoom;
+				}
+			}
+		}
+		
+		private function checkCanMove():void
+		{
+			// x 
+			if( halfWorldWidth*2*_zoom < windowWidth ){
+				// check if width of world is less than window , align center
+				worldContainer.x = windowWidth*.5;
+				canMoveX = false;
+			}else{
+				canMoveX = true;
+			}
+			
+			// y
+			if( halfWorldHeight*2*_zoom < windowHeight ){
+				// check if height of world is less than window , align center
+				worldContainer.y = windowHeight*.5;
+				canMoveY = false;
+			}else{
+				canMoveY = true;
+			}
+		}
 		
 		
 		/**
@@ -145,23 +189,27 @@ package EXIT.starlingiso.display
 		
 		private function updateWorldContainerX(_x:Number):void
 		{
-			if( _x-halfWorldWidth*_zoom > 0 ){
-				worldContainer.x = halfWorldWidth*_zoom;
-			}else if( _x+halfWorldWidth*_zoom < widowWidth ){
-				worldContainer.x = widowWidth-halfWorldWidth*_zoom;
-			}else{
-				worldContainer.x = _x;
+			if( canMoveX ){
+				if( _x-halfWorldWidth*_zoom > 0 ){
+					worldContainer.x = halfWorldWidth*_zoom;
+				}else if( _x+halfWorldWidth*_zoom < windowWidth ){
+					worldContainer.x = windowWidth-halfWorldWidth*_zoom;
+				}else{
+					worldContainer.x = _x;
+				}
 			}
 		}
 		
 		private function updateWorldContainerY(_y:Number):void
 		{
-			if( _y-halfWorldHeight*_zoom > 0 ){
-				worldContainer.y = halfWorldHeight*_zoom;
-			}else if( _y+halfWorldHeight*_zoom < widowHeight ){
-				worldContainer.y = widowHeight-halfWorldHeight*_zoom;
-			}else{
-				worldContainer.y = _y;
+			if( canMoveY ){
+				if( _y-halfWorldHeight*_zoom > 0 ){
+					worldContainer.y = halfWorldHeight*_zoom;
+				}else if( _y+halfWorldHeight*_zoom < windowHeight ){
+					worldContainer.y = windowHeight-halfWorldHeight*_zoom;
+				}else{
+					worldContainer.y = _y;
+				}
 			}
 		}
 		
@@ -174,6 +222,7 @@ package EXIT.starlingiso.display
 		{
 			this._zoom = _zoom;
 			worldContainer.scaleX = worldContainer.scaleY = this._zoom;
+			checkCanMove();
 		}
 		public function get zoom():Number{return _zoom;}
 	}

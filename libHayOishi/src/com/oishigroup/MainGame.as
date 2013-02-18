@@ -7,15 +7,16 @@ package com.oishigroup
 	
 	import com.oishigroup.metadata.MetaData;
 	
+	import flash.events.Event;
+	
 	import starling.display.Sprite;
 	
 	public class MainGame extends Sprite
 	{
-		private var mainIsoWorld:MainIsoWorld;
+		protected var mainIsoWorld:MainIsoWorld;
 		public function MainGame(_interactiveController:BaseInteractController)
 		{
 			super();
-			
 			mainIsoWorld = new MainIsoWorld(_interactiveController,MetaData.isDebug);
 			addChild(mainIsoWorld);
 		}

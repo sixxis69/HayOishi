@@ -44,15 +44,15 @@ package EXIT.starlingiso.interactcontroller
 		{
 			var _this:BaseInteractController = this;
 			if( _zoom>MAX_ZOOM){
-				TweenLite.to(_this,.2,{currentZoom:MAX_ZOOM*1.1,onComplete:function():void{
-					TweenLite.to(_this,.2,{currentZoom:MAX_ZOOM});
+				TweenLite.to(_this,.2,{zoom:MAX_ZOOM*1.1,onComplete:function():void{
+					TweenLite.to(_this,.2,{zoom:MAX_ZOOM});
 				}});
 			}else if( _zoom<MIN_ZOOM){
-				TweenLite.to(_this,.2,{currentZoom:MIN_ZOOM*.9,onComplete:function():void{
-					TweenLite.to(_this,.2,{currentZoom:MIN_ZOOM});
+				TweenLite.to(_this,.2,{zoom:MIN_ZOOM*.9,onComplete:function():void{
+					TweenLite.to(_this,.2,{zoom:MIN_ZOOM});
 				}});
 			}else{
-				TweenLite.to(_this,.3,{currentZoom:_zoom});
+				TweenLite.to(_this,.3,{zoom:_zoom});
 			}
 		}
 		
