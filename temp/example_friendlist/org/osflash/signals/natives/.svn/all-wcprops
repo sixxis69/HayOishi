@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/natives
+END
+NativeRelaySignal.as
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/natives/NativeRelaySignal.as
+END
+NativeSignal.as
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/natives/NativeSignal.as
+END
+INativeDispatcher.as
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/natives/INativeDispatcher.as
+END
+INativeSignalOwner.as
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/natives/INativeSignalOwner.as
+END
+NativeMappedSignal.as
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/natives/NativeMappedSignal.as
+END

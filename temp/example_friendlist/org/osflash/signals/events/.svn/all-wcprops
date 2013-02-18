@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/events
+END
+GenericEvent.as
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/events/GenericEvent.as
+END
+IBubbleEventHandler.as
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/events/IBubbleEventHandler.as
+END
+IEvent.as
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/events/IEvent.as
+END

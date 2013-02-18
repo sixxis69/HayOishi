@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals
+END
+Signal.as
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/Signal.as
+END
+IDispatcher.as
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/IDispatcher.as
+END
+ISignalOwner.as
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/ISignalOwner.as
+END
+DeluxeSignal.as
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/DeluxeSignal.as
+END
+ISignal.as
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/ISignal.as
+END
+IPrioritySignal.as
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/area80libs/!svn/ver/7/trunk/libs/org/osflash/signals/IPrioritySignal.as
+END

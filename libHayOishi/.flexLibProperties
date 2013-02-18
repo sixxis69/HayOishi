@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="EXIT.starlingiso.data.CellData"/>
+    <classEntry path="EXIT.starlingiso.data.WorldData"/>
+    <classEntry path="EXIT.starlingiso.display.BaseInteractController"/>
+    <classEntry path="EXIT.starlingiso.display.DebugGrid"/>
+    <classEntry path="EXIT.starlingiso.display.IsoWorld"/>
+    <classEntry path="EXIT.starlingiso.interactcontroller.TouchController"/>
+    <classEntry path="EXIT.starlingiso.util.IsoHelper"/>
+    <classEntry path="com.oishigroup.MainGame"/>
+    <classEntry path="com.oishigroup.MainApp"/>
+    <classEntry path="com.oishigroup.metadata.AppDelegate"/>
+    <classEntry path="com.oishigroup.metadata.MetaData"/>
+    <classEntry path="EXIT.starlingiso.display.ObjectStatic"/>
+    <classEntry path="EXIT.starlingiso.interactcontroller.MouseInteractController"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
