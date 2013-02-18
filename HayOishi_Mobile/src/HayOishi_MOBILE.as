@@ -1,11 +1,7 @@
 package
 {
 	import com.oishigroup.MainApp;
-	import com.oishigroup.metadata.AppDelegate;
-	
-	import flash.display.Sprite;
-	import flash.display.StageAlign;
-	import flash.display.StageScaleMode;
+	import com.oishigroup.MainGameMobile;
 	
 	public class HayOishi_MOBILE extends MainApp
 	{
@@ -13,7 +9,7 @@ package
 		{
 			super();
 			
-			initDelegate(AppDelegate);
+			initApp(MainGameMobile)
 		}
 	}
 }

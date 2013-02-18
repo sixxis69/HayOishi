@@ -1,6 +1,5 @@
 package com.oishigroup
 {
-	import com.oishigroup.metadata.AppDelegate;
 	import com.oishigroup.metadata.MetaData;
 	
 	import flash.display.Sprite;
@@ -24,6 +23,7 @@ package com.oishigroup
 	{
 
 		private var starlingMain:Starling;
+		private var mainGameClass:Class;
 		public function MainApp()
 		{
 			super();
@@ -35,13 +35,14 @@ package com.oishigroup
 			MetaData.flashStage = stage;
 		}
 		
-		
-		protected function initDelegate(_appDelegateClass:Class):void
+		/**
+		 * 
+		 * @param _mainGameClass must extend MainGame
+		 * 
+		 */		
+		protected function initApp(_mainGameClass:Class):void
 		{
-			if( !_appDelegateClass is AppDelegate ){
-				throw new Error("Main must init with AppDelegate Class");
-			}
-			
+			mainGameClass = _mainGameClass;
 			if( MetaData.isDebug )
 				addChild( new FPS() );
 			setTimeout(startApp,100);
@@ -51,7 +52,7 @@ package com.oishigroup
 		{
 			MetaData.stageWidth = stage.stageWidth;
 			MetaData.stageHeight = stage.stageHeight;
-			starlingMain = new Starling(MainGame,stage, new Rectangle(0,0,stage.stageWidth,stage.stageHeight));
+			starlingMain = new Starling(mainGameClass,stage, new Rectangle(0,0,stage.stageWidth,stage.stageHeight));
 			starlingMain.start();
 			starlingMain.simulateMultitouch = MetaData.isDebug;
 			starlingMain.antiAliasing = 0;

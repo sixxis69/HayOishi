@@ -10,10 +10,10 @@
     <classEntry path="EXIT.starlingiso.util.IsoHelper"/>
     <classEntry path="com.oishigroup.MainGame"/>
     <classEntry path="com.oishigroup.MainApp"/>
-    <classEntry path="com.oishigroup.metadata.AppDelegate"/>
     <classEntry path="com.oishigroup.metadata.MetaData"/>
     <classEntry path="EXIT.starlingiso.display.ObjectStatic"/>
     <classEntry path="EXIT.starlingiso.interactcontroller.MouseInteractController"/>
+    <classEntry path="com.oishigroup.MainIsoWorld"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
