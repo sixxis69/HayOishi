@@ -16,11 +16,11 @@ package EXIT.starlingiso.util
 			cellWidth = _cellWidth;
 			
 			colRow00 = new Point(
-				-numColumn*.5*cellWidth*.5 // add x from colum
-				+numRow*.5*cellWidth*.5 // add x from row
+				-numColumn*cellWidth*.25 // add x from colum
+				+numRow*cellWidth*.25 // add x from row
 				,
-				-numColumn*.5*cellWidth*.5*.5 // add y from colum
-				-numRow*.5*cellWidth*.5*.5 // add y from row
+				-numColumn*cellWidth*.125 // add y from colum
+				-numRow*cellWidth*.125 // add y from row
 			);
 		}	
 		
@@ -45,8 +45,20 @@ package EXIT.starlingiso.util
 				-_row*cellWidth*.5 // add x from row
 				,
 				colRow00.y
-				+_col*cellWidth*.5*.5 // add y from colum
-				+_row*cellWidth*.5*.5 // add y from row
+				+_col*cellWidth*.25 // add y from colum
+				+_row*cellWidth*.25 // add y from row
+			);
+		}
+		
+		
+		public function colRowToXYNoRelateToWorldCenter(_col:Number,_row:Number):Point
+		{
+			return new Point(
+				_col*cellWidth*.5 // add x from colum
+				-_row*cellWidth*.5 // add x from row
+				,
+				_col*cellWidth*.25 // add y from colum
+				+_row*cellWidth*.25 // add y from row
 			);
 		}
 	}

@@ -19,13 +19,18 @@ package EXIT.starlingiso.display
 		internal var worldData:WorldData; 
 		//interactive
 		protected var interactController:BaseInteractController;
+		//obj & position
+		protected var positionController:PositionController;
+		protected var isoObjects:Vector.<ObjectStatic> = new Vector.<ObjectStatic>();
 		
 		internal var touchDummy:Quad;
 		internal var worldContainer:Sprite;
 		
+		protected var nowIndex:int = 0;
+		
         // debug		
-		private var debugGrid:DebugGrid;
-		private var isDebug:Boolean;
+		internal var debugGrid:DebugGrid;
+		protected var isDebug:Boolean;
 		
 		public function IsoWorld(
 			_worldData:WorldData , 
@@ -54,13 +59,12 @@ package EXIT.starlingiso.display
 			interactController.initialize(this);
 			interactController.active();
 			
+			positionController = new PositionController(worldData);
+			
 			worldContainer.x = worldData.windowWidth*.5;
 			worldContainer.y = worldData.windowHeight*.5;
 			addEventListener(Event.REMOVED_FROM_STAGE , deactive );
 		}
-		
-		//public function addBackground(_background:DisplayObject):void
-		
 		
 		public function deactive(e:Event):void
 		{
@@ -72,6 +76,21 @@ package EXIT.starlingiso.display
 			touchDummy.width = _windowWidth;
 			touchDummy.height = _windowHeight;
 			interactController.updateWindow(_windowWidth,_windowHeight);
+		}
+		
+		public function addObject(_objectStatic:ObjectStatic):Boolean
+		{
+			// make sure that object has enough room to add to its position in the world
+			var canAdd:Boolean = positionController.canAdd(_objectStatic);
+			if( canAdd ){
+				worldContainer.addChild(_objectStatic.skin);
+				_objectStatic.addWorld(this,nowIndex);
+				positionController.addObject(_objectStatic,nowIndex);
+				isoObjects.push(_objectStatic);
+				debugGrid.addObject(_objectStatic,nowIndex);
+				nowIndex++;
+			}
+			return canAdd;
 		}
 		 
 		/**

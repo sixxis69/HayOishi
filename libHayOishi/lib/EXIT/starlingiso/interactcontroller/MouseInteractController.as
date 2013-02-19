@@ -36,7 +36,7 @@ package EXIT.starlingiso.interactcontroller
 				nowZoom = MIN_ZOOM;
 				tweenZoom(MIN_ZOOM-1);
 			}else{
-				zoom = nowZoom;
+				tweenZoom(nowZoom);
 			}
 		}
 		

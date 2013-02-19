@@ -2,6 +2,7 @@ package
 {
 	import com.oishigroup.MainApp;
 	import com.oishigroup.MainGameWeb;
+	import com.oishigroup.metadata.MetaData;
 	
 	import flash.events.Event;
 	import flash.geom.Rectangle;
@@ -11,6 +12,7 @@ package
 		public function main()
 		{
 			stage.addEventListener(Event.RESIZE,resized);
+			MetaData.isDebug = true;
 			initApp(MainGameWeb);
 		}
 		
