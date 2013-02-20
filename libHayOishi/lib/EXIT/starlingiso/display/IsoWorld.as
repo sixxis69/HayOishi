@@ -17,15 +17,13 @@ package EXIT.starlingiso.display
 		//                 +            +
 		
 		internal var worldData:WorldData; 
+		internal var touchDummy:Quad;
+		internal var objectContainer:Sprite;
+		
 		//interactive
 		protected var interactController:BaseInteractController;
 		//obj & position
-		protected var positionController:PositionController;
-		protected var isoObjects:Vector.<ObjectStatic> = new Vector.<ObjectStatic>();
-		
-		internal var touchDummy:Quad;
-		internal var worldContainer:Sprite;
-		
+		protected var objectManager:WorldObjectManager;
 		protected var nowIndex:int = 0;
 		
         // debug		
@@ -49,9 +47,9 @@ package EXIT.starlingiso.display
 		
 		protected function initialize():void
 		{
-			worldContainer = new Sprite();
-			worldContainer.touchable=false;
-			addChild(worldContainer);
+			objectContainer = new Sprite();
+			objectContainer.touchable=false;
+			addChild(objectContainer);
 			touchDummy = new Quad(worldData.windowWidth,worldData.windowHeight,0xaa5555);
 			touchDummy.alpha=.5;
 			addChild(touchDummy);
@@ -59,10 +57,10 @@ package EXIT.starlingiso.display
 			interactController.initialize(this);
 			interactController.active();
 			
-			positionController = new PositionController(worldData);
+			objectManager = new WorldObjectManager(this);
 			
-			worldContainer.x = worldData.windowWidth*.5;
-			worldContainer.y = worldData.windowHeight*.5;
+			objectContainer.x = worldData.windowWidth*.5;
+			objectContainer.y = worldData.windowHeight*.5;
 			addEventListener(Event.REMOVED_FROM_STAGE , deactive );
 		}
 		
@@ -78,19 +76,24 @@ package EXIT.starlingiso.display
 			interactController.updateWindow(_windowWidth,_windowHeight);
 		}
 		
-		public function addObject(_objectStatic:ObjectStatic):Boolean
+		public function addIsoObject(_objectStatic:ObjectStatic):Boolean
 		{
-			// make sure that object has enough room to add to its position in the world
-			var canAdd:Boolean = positionController.canAdd(_objectStatic);
+			// make sure that object has enough room to add to the world
+			var canAdd:Boolean = objectManager.canAdd(_objectStatic);
 			if( canAdd ){
-				worldContainer.addChild(_objectStatic.skin);
-				_objectStatic.addWorld(this,nowIndex);
-				positionController.addObject(_objectStatic,nowIndex);
-				isoObjects.push(_objectStatic);
-				debugGrid.addObject(_objectStatic,nowIndex);
+				objectManager.addObject(_objectStatic,nowIndex);
+				if( isDebug )
+					debugGrid.addObject(_objectStatic,nowIndex);
 				nowIndex++;
 			}
 			return canAdd;
+		}
+		
+		public function removeIsoObject(_objectStatic:ObjectStatic):void
+		{
+			objectManager.removeObject(_objectStatic);
+			if( isDebug )
+				debugGrid.removeObject(_objectStatic);
 		}
 		 
 		/**
@@ -101,7 +104,7 @@ package EXIT.starlingiso.display
 		{
 			debugGrid = new DebugGrid(worldData);
 			debugGrid.touchable=false;
-			worldContainer.addChild(debugGrid);
+			objectContainer.addChild(debugGrid);
 		}
 	}
 }

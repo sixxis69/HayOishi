@@ -47,7 +47,7 @@ package EXIT.starlingiso.display
 		public function initialize(_isoWold:IsoWorld):void
 		{
 			touchDummy = _isoWold.touchDummy;
-			worldContainer = _isoWold.worldContainer;
+			worldContainer = _isoWold.objectContainer;
 			halfWorldWidth = _isoWold.worldData.worldWidth*.5;
 			halfWorldHeight = _isoWold.worldData.worldHeight*.5;
 			updateWindow(_isoWold.worldData.windowWidth,_isoWold.worldData.windowHeight);

@@ -14,7 +14,9 @@
     <classEntry path="EXIT.starlingiso.display.ObjectStatic"/>
     <classEntry path="EXIT.starlingiso.interactcontroller.MouseInteractController"/>
     <classEntry path="com.oishigroup.MainIsoWorld"/>
-    <classEntry path="EXIT.starlingiso.display.PositionController"/>
+    <classEntry path="EXIT.starlingiso.display.WorldObjectManager"/>
+    <classEntry path="com.oishigroup.controller.MenuBuildingViewController"/>
+    <classEntry path="com.oishigroup.view.MenuBuildingView"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -23,7 +23,6 @@ package EXIT.starlingiso.display
 			this._skin = _skin;
 			this._numColumn = _numColumn;
 			this._numRow = _numRow;
-			this._skin.touchable = false;
 		}
 		
 		public function setColumnRow(_column:uint,_row:uint):void
@@ -76,5 +75,10 @@ package EXIT.starlingiso.display
 		public function get column():int { return _column; }
 		public function get skin():DisplayObject { return _skin; }
 		internal function get index():int { return _index; }
+		
+		public function toString():String
+		{
+			return "[ "+_column+","+_row+" ]";
+		}
 	}
 }

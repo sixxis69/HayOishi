@@ -5,6 +5,7 @@ package EXIT.starlingiso.display
 	import EXIT.starlingiso.util.IsoHelper;
 	
 	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	
 	import starling.display.Graphics;
 	import starling.display.Image;
@@ -12,10 +13,12 @@ package EXIT.starlingiso.display
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	
-	public class DebugGrid extends Sprite
+	internal class DebugGrid extends Sprite
 	{
 		private var graphics :Graphics;
 		private var worldData:WorldData;
+		private var dictGround:Dictionary = new Dictionary();
+		
 		public function DebugGrid(_worldData:WorldData)
 		{
 			super();
@@ -52,6 +55,13 @@ package EXIT.starlingiso.display
 			shape.x = p.x;
 			shape.y = p.y;
 			addChild(shape);
+			dictGround[_objectStatic] = shape;
+		}
+		
+		public function removeObject(_objectStatic:ObjectStatic):void
+		{
+			removeChild(dictGround[_objectStatic]);
+			delete dictGround[_objectStatic];
 		}
 		
 		
