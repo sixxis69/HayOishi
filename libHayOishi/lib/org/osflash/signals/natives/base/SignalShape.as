@@ -11,6 +11,11 @@ package org.osflash.signals.natives.base
 	{
 
 		private var _signals : DisplayObjectSignalSet;
+		
+		public function SignalShape():void
+		{
+			super();
+		}
 
 		public function get signals() : DisplayObjectSignalSet
 		{

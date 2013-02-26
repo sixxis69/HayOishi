@@ -1,17 +1,17 @@
-package EXIT.starlingiso.interactcontroller
+package com.oishigroup.interactivemanager
 {
-	import EXIT.starlingiso.display.BaseInteractController;
-	import EXIT.starlingiso.display.IsoWorld;
-	
 	import com.greensock.TweenLite;
 	import com.oishigroup.metadata.MetaData;
 	
 	import flash.events.MouseEvent;
 	
-	public class MouseInteractController extends BaseInteractController
+	import EXIT.starlingiso.display.BaseInteractiveManager;
+	import EXIT.starlingiso.display.IsoWorld;
+	
+	public class MouseInteractManager extends MoveableInteractiveManager
 	{
 		private var nowZoom:Number = 1;
-		public function MouseInteractController()
+		public function MouseInteractManager()
 		{
 			super();
 		}
@@ -42,7 +42,7 @@ package EXIT.starlingiso.interactcontroller
 		
 		protected function tweenZoom(_zoom:Number):void
 		{
-			var _this:BaseInteractController = this;
+			var _this:BaseInteractiveManager = this;
 			if( _zoom>MAX_ZOOM){
 				TweenLite.to(_this,.2,{zoom:MAX_ZOOM*1.1,onComplete:function():void{
 					TweenLite.to(_this,.2,{zoom:MAX_ZOOM});

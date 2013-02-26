@@ -1,5 +1,7 @@
 package EXIT.starlingiso.display
 {
+	import flash.geom.Point;
+	
 	import EXIT.starlingiso.data.WorldData;
 	
 	import starling.display.Quad;
@@ -16,14 +18,15 @@ package EXIT.starlingiso.display
 		//              +     +      +     +
 		//                 +            +
 		
-		internal var worldData:WorldData; 
+		public var worldData:WorldData; 
+		public var objectManager:WorldObjectManager;
+		
 		internal var touchDummy:Quad;
 		internal var objectContainer:Sprite;
 		
 		//interactive
-		protected var interactController:BaseInteractController;
+		protected var interactManager:BaseInteractiveManager;
 		//obj & position
-		protected var objectManager:WorldObjectManager;
 		protected var nowIndex:int = 0;
 		
         // debug		
@@ -32,12 +35,12 @@ package EXIT.starlingiso.display
 		
 		public function IsoWorld(
 			_worldData:WorldData , 
-			_interactController:BaseInteractController ,
+			_interactManger:BaseInteractiveManager ,
 			_isDebug:Boolean=true)
 		{
 			super();
 			worldData = _worldData;
-			interactController = _interactController;
+			interactManager = _interactManger;
 			isDebug = _isDebug;
 			
 			initialize();
@@ -54,8 +57,8 @@ package EXIT.starlingiso.display
 			touchDummy.alpha=.5;
 			addChild(touchDummy);
 			
-			interactController.initialize(this);
-			interactController.active();
+			interactManager.initialize(this);
+			interactManager.active();
 			
 			objectManager = new WorldObjectManager(this);
 			
@@ -64,38 +67,87 @@ package EXIT.starlingiso.display
 			addEventListener(Event.REMOVED_FROM_STAGE , deactive );
 		}
 		
-		public function deactive(e:Event):void
+		public function deactive(e:Event=null):void
 		{
-			interactController.deactive();	
+			interactManager.deactive();	
 		}		
 		
 		public function updateWindowSize(_windowWidth:Number,_windowHeight:Number):void
 		{
 			touchDummy.width = _windowWidth;
 			touchDummy.height = _windowHeight;
-			interactController.updateWindow(_windowWidth,_windowHeight);
+			interactManager.updateWindow(_windowWidth,_windowHeight);
 		}
 		
-		public function addIsoObject(_objectStatic:ObjectStatic):Boolean
+		/**
+		 *<p>If the world not have enough room to add object ,the object is still added to world but not register its position to the world</p> 
+		 * @param _isoObject
+		 * @return 
+		 * 
+		 */		
+		public function addIsoObject(_isoObject:IsoObject):Boolean
 		{
+			trace(" world addIsoObject : ",_isoObject.column,_isoObject.row );
 			// make sure that object has enough room to add to the world
-			var canAdd:Boolean = objectManager.canAdd(_objectStatic);
-			if( canAdd ){
-				objectManager.addObject(_objectStatic,nowIndex);
-				if( isDebug )
-					debugGrid.addObject(_objectStatic,nowIndex);
-				nowIndex++;
-			}
+			var canAdd:Boolean = objectManager.addObject(_isoObject,nowIndex);
+			if( isDebug && canAdd)
+				debugGrid.addObject(_isoObject,nowIndex);
+			nowIndex++;
 			return canAdd;
 		}
 		
-		public function removeIsoObject(_objectStatic:ObjectStatic):void
+		public function removeIsoObject(_isoObject:IsoObject):void
 		{
-			objectManager.removeObject(_objectStatic);
+			objectManager.removeObject(_isoObject);
 			if( isDebug )
-				debugGrid.removeObject(_objectStatic);
+				debugGrid.removeObject(_isoObject);
 		}
-		 
+		
+		/*public function moveIsoObject(_isoObject:IsoObject,_toCell:CellData):Boolean
+		{
+			// make sure that object has enough room to move
+			var canMove:Boolean = objectManager.moveObject(_isoObject,_toCell);
+			if( isDebug && canMove)
+				debugGrid.moveObject(_isoObject);
+			return canMove;
+		}*/
+		
+		public function getCenterPointObject(_isoObject:IsoObject):Point
+		{
+			return new Point(
+				objectContainer.x+_isoObject.centerXY.x*objectContainer.scaleX,
+				objectContainer.y+_isoObject.centerXY.y*objectContainer.scaleY
+			);
+			
+		}
+		
+		public function getIsoObjectAt(_col:uint, _row:uint):IsoObject
+		{
+			return objectManager.getIsoObjectAt(_col,_row);
+		}
+		
+		public function hasEnoughRoom(_column:int,_row:int,_numColumn:uint,_numRow:uint):Boolean
+		{
+			return objectManager.hasEnoughRoom(_column,_row,_numColumn,_numRow);
+		}
+		
+		
+		/**
+		 *for add object skin  but not regis to the world 
+		 * @param _isoObject
+		 * 
+		 */		
+		public function addDummyObject(_isoObject:IsoObject):void
+		{
+			objectContainer.addChild(_isoObject.skin);
+			_isoObject.addWorld(this,-1);
+		}
+		
+		public function removeDummyObject(_isoObject:IsoObject):void
+		{
+			objectContainer.removeChild(_isoObject.skin);
+		}
+		
 		/**
 		 * DEBUG 
 		 */		

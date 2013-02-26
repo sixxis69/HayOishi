@@ -115,12 +115,6 @@ package EXIT.starling.util
 				if (mouseDownCallBack!=null)
 					mouseDownCallBack(touch);
 				startMouseDownPoint = new Point(touch.globalX, touch.globalY);
-
-
-//				var t:Touch = e.getTouch(btn.parent);
-//				var nt:Touch = new Touch( t.id , t.globalX , t.globalY , TouchPhase.ENDED , btn );
-//				var touchEvent:TouchEvent = new TouchEvent(TouchEvent.TOUCH ,  new <Touch>[nt] );
-//				setTimeout(  function():void{btn.dispatchEvent(  touchEvent ); } , 100 );
 				mIsDown = true;
 			} else if (touch.phase==TouchPhase.MOVED&&mIsDown) {
 				if (mouseMoveCallBack!=null)

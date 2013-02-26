@@ -1,23 +1,41 @@
 package com.oishigroup
 {
-	import EXIT.starlingiso.display.BaseInteractController;
-	import EXIT.starlingiso.display.ObjectStatic;
-	
+	import com.oishigroup.controller.CountDownMovePopupViewController;
 	import com.oishigroup.controller.MenuBuildingViewController;
+	import com.oishigroup.interactivemanager.MoveableInteractiveManager;
 	import com.oishigroup.metadata.MetaData;
+	import com.oishigroup.model.InteractiveModel;
+	
+	import flash.geom.Point;
+	
+	import EXIT.starlingiso.display.IsoObject;
 	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	
 	public class MainGame extends Sprite
 	{
-		protected var mainIsoWorld:MainIsoWorld;
+		protected var mainIsoWorld:IsoWorldObjectMoveAble;
 		protected var menuBuildingViewController:MenuBuildingViewController;
-		public function MainGame(_interactiveController:BaseInteractController)
+		
+		
+		private var countDownPopupController:CountDownMovePopupViewController = new CountDownMovePopupViewController(startMove);
+		private var popupLayer:Sprite = new Sprite();
+		
+		public function MainGame(_moveableInteractiveManager:MoveableInteractiveManager)
 		{
 			super();
-			mainIsoWorld = new MainIsoWorld(_interactiveController,MetaData.isDebug);
+			
+			//iso world
+			mainIsoWorld = new IsoWorldObjectMoveAble(_moveableInteractiveManager,MetaData.isDebug);
 			addChild(mainIsoWorld);
+			
+			//interactive
+			InteractiveModel.instance.signalSelectObject.add(showTimeoutToMove);
+			InteractiveModel.instance.signalCancelObject.add(hideTimeoutToMove);
+			addChild(popupLayer);
+			
+			//menu
 			menuBuildingViewController = new MenuBuildingViewController();
 			addChild(menuBuildingViewController.view);
 			
@@ -26,10 +44,10 @@ package com.oishigroup
 		
 		private function forTest():void
 		{
-			var tempObjs:Vector.<ObjectStatic> = new Vector.<ObjectStatic>();
+			var tempObjs:Vector.<IsoObject> = new Vector.<IsoObject>();
 			for( var i:uint=0 ; i<=4 ; i++){
 				var quad:Quad = new Quad(100,100,0xAAAAAA*Math.random(),false);
-				var obj:ObjectStatic = new ObjectStatic(quad,2,2);
+				var obj:IsoObject = new IsoObject(quad,2,2);
 				obj.setColumnRow(i*2,i);
 				mainIsoWorld.addIsoObject(obj);
 				tempObjs.push(obj);
@@ -40,5 +58,31 @@ package com.oishigroup
 			mainIsoWorld.removeIsoObject(tempObjs[2]);
 			mainIsoWorld.removeIsoObject(tempObjs[0]);
 		}
+		
+		/**
+		 * Time out pop up 
+		 */		
+		
+		private function showTimeoutToMove(_selectObject:IsoObject):void
+		{
+			countDownPopupController.start();
+			var p:Point = mainIsoWorld.getCenterPointObject(_selectObject);
+			countDownPopupController.view.x = p.x
+			countDownPopupController.view.y = p.y
+			popupLayer.addChild(countDownPopupController.view);
+		}
+		
+		private function hideTimeoutToMove():void
+		{
+			popupLayer.removeChild(countDownPopupController.view);
+			countDownPopupController.stop();
+		}
+		
+		private function startMove():void
+		{
+			hideTimeoutToMove();
+			InteractiveModel.instance.signalStartMoveObject.dispatch();
+		}
+		
 	}
 }

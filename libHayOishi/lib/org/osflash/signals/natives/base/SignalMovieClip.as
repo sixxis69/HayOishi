@@ -8,6 +8,11 @@ package org.osflash.signals.natives.base
 	{
 
 		private var _signals : InteractiveObjectSignalSet;
+		
+		public function SignalMovieClip():void
+		{
+			super();
+		}
 
 		public function get signals() : InteractiveObjectSignalSet
 		{

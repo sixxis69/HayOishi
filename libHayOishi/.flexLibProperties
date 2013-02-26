@@ -3,20 +3,22 @@
   <includeClasses>
     <classEntry path="EXIT.starlingiso.data.CellData"/>
     <classEntry path="EXIT.starlingiso.data.WorldData"/>
-    <classEntry path="EXIT.starlingiso.display.BaseInteractController"/>
     <classEntry path="EXIT.starlingiso.display.DebugGrid"/>
     <classEntry path="EXIT.starlingiso.display.IsoWorld"/>
-    <classEntry path="EXIT.starlingiso.interactcontroller.TouchController"/>
     <classEntry path="EXIT.starlingiso.util.IsoHelper"/>
     <classEntry path="com.oishigroup.MainGame"/>
     <classEntry path="com.oishigroup.MainApp"/>
     <classEntry path="com.oishigroup.metadata.MetaData"/>
-    <classEntry path="EXIT.starlingiso.display.ObjectStatic"/>
-    <classEntry path="EXIT.starlingiso.interactcontroller.MouseInteractController"/>
-    <classEntry path="com.oishigroup.MainIsoWorld"/>
     <classEntry path="EXIT.starlingiso.display.WorldObjectManager"/>
     <classEntry path="com.oishigroup.controller.MenuBuildingViewController"/>
     <classEntry path="com.oishigroup.view.MenuBuildingView"/>
+    <classEntry path="com.oishigroup.building.TestBuildingView"/>
+    <classEntry path="com.oishigroup.interactivemanager.MoveableInteractiveManager"/>
+    <classEntry path="com.oishigroup.building.MoveableIsoObject"/>
+    <classEntry path="com.oishigroup.controller.CountDownMovePopupViewController"/>
+    <classEntry path="com.oishigroup.view.CountDownPopupView"/>
+    <classEntry path="com.oishigroup.building.BaseSkinSprite"/>
+    <classEntry path="com.oishigroup.building.BaseSkinImage"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

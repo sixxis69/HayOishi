@@ -1,6 +1,6 @@
 package com.oishigroup
 {
-	import EXIT.starlingiso.interactcontroller.MouseInteractController;
+	import com.oishigroup.interactivemanager.MouseInteractManager;
 	
 	import com.oishigroup.metadata.MetaData;
 	
@@ -10,7 +10,7 @@ package com.oishigroup
 	{
 		public function MainGameWeb()
 		{
-			super(new MouseInteractController());
+			super(new MouseInteractManager());
 			MetaData.flashStage.addEventListener(Event.RESIZE,resized);
 		}
 		

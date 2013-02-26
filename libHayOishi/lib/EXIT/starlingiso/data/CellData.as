@@ -14,5 +14,10 @@ package EXIT.starlingiso.data
 		{
 			return new CellData(col,row);
 		}
+		
+		public function toString():String
+		{
+			return "["+col+","+row+"]";
+		}
 	}
 }

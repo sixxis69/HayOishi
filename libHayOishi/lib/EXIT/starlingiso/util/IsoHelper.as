@@ -2,6 +2,8 @@ package EXIT.starlingiso.util
 {
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	
+	import EXIT.starlingiso.data.CellData;
 
 	public class IsoHelper
 	{
@@ -16,11 +18,9 @@ package EXIT.starlingiso.util
 			cellWidth = _cellWidth;
 			
 			colRow00 = new Point(
-				-numColumn*cellWidth*.25 // add x from colum
-				+numRow*cellWidth*.25 // add x from row
+				(-numColumn+numRow)*cellWidth*.25 // add x from -col+row
 				,
-				-numColumn*cellWidth*.125 // add y from colum
-				-numRow*cellWidth*.125 // add y from row
+				(-numColumn-numRow)*cellWidth*.125 // add y from -col-row
 			);
 		}	
 		
@@ -35,18 +35,21 @@ package EXIT.starlingiso.util
 				);
 		}
 		
-		
+		public function xyToRowCol(_x:Number,_y:Number):CellData
+		{
+			return new CellData(
+				( (_x-colRow00.x     + 2*(_y-colRow00.y) )/cellWidth )>>0,
+				( (2*(_y-colRow00.y) - (_x-colRow00.x)   )/cellWidth )>>0);
+		}
 		
 		public function colRowToXY(_col:Number,_row:Number):Point
 		{
 			return new Point(
 				colRow00.x
-				+_col*cellWidth*.5 // add x from colum
-				-_row*cellWidth*.5 // add x from row
+				+(_col-_row)*cellWidth*.5
 				,
 				colRow00.y
-				+_col*cellWidth*.25 // add y from colum
-				+_row*cellWidth*.25 // add y from row
+				+(_col+_row)*cellWidth*.25
 			);
 		}
 		
@@ -54,11 +57,9 @@ package EXIT.starlingiso.util
 		public function colRowToXYNoRelateToWorldCenter(_col:Number,_row:Number):Point
 		{
 			return new Point(
-				_col*cellWidth*.5 // add x from colum
-				-_row*cellWidth*.5 // add x from row
+				(_col-_row)*cellWidth*.5
 				,
-				_col*cellWidth*.25 // add y from colum
-				+_row*cellWidth*.25 // add y from row
+				(_col+_row)*cellWidth*.25
 			);
 		}
 	}

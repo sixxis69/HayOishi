@@ -1,15 +1,12 @@
 package EXIT.starlingiso.display
 {
-	import EXIT.starlingiso.data.CellData;
-	import EXIT.starlingiso.data.WorldData;
-	import EXIT.starlingiso.util.IsoHelper;
-	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
+	import EXIT.starlingiso.data.CellData;
+	import EXIT.starlingiso.data.WorldData;
+	
 	import starling.display.Graphics;
-	import starling.display.Image;
-	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	
@@ -48,20 +45,32 @@ package EXIT.starlingiso.display
 		}
 		
 		
-		public function addObject(_objectStatic:ObjectStatic, nowIndex:int):void
+		internal function addObject(_isoObject:IsoObject, nowIndex:int):void
 		{
-			var shape:Shape = drawCell( _objectStatic);
-			var p:Point = worldData.isoHelper.colRowToXY(_objectStatic.column,_objectStatic.row);
+			var shape:Shape = drawCell( _isoObject);
+			var p:Point = worldData.isoHelper.colRowToXY(_isoObject.column,_isoObject.row);
 			shape.x = p.x;
 			shape.y = p.y;
 			addChild(shape);
-			dictGround[_objectStatic] = shape;
+			dictGround[_isoObject] = shape;
 		}
 		
-		public function removeObject(_objectStatic:ObjectStatic):void
+		internal function removeObject(_isoObject:IsoObject):void
 		{
-			removeChild(dictGround[_objectStatic]);
-			delete dictGround[_objectStatic];
+			removeChild(dictGround[_isoObject]);
+			delete dictGround[_isoObject];
+		}
+		
+		internal function moveObject(_isoObject:IsoObject):void
+		{
+			if( !dictGround[_isoObject] ){
+				addObject(_isoObject,_isoObject.index);
+			}
+			var p:Point = worldData.isoHelper.colRowToXY(_isoObject.column,_isoObject.row);
+			if( dictGround[_isoObject] ){
+				dictGround[_isoObject].x = p.x;
+				dictGround[_isoObject].y = p.y;
+			}
 		}
 		
 		
@@ -77,11 +86,11 @@ package EXIT.starlingiso.display
 			graphics.lineTo( toPoint.x , toPoint.y );
 		}
 		
-		private function drawCell(_objectStatic:ObjectStatic):Shape
+		private function drawCell(_isoObject:IsoObject):Shape
 		{
-			var rt:Point = worldData.isoHelper.colRowToXYNoRelateToWorldCenter(_objectStatic.numColumn,0);
-			var rb:Point = worldData.isoHelper.colRowToXYNoRelateToWorldCenter(_objectStatic.numColumn,_objectStatic.numRow);
-			var lb:Point = worldData.isoHelper.colRowToXYNoRelateToWorldCenter(0,_objectStatic.numRow);
+			var rt:Point = worldData.isoHelper.colRowToXYNoRelateToWorldCenter(_isoObject.numColumn,0);
+			var rb:Point = worldData.isoHelper.colRowToXYNoRelateToWorldCenter(_isoObject.numColumn,_isoObject.numRow);
+			var lb:Point = worldData.isoHelper.colRowToXYNoRelateToWorldCenter(0,_isoObject.numRow);
 			
 			var sp:Shape = new Shape();
 			sp.graphics.beginFill(0x118888);

@@ -1,12 +1,12 @@
 package com.oishigroup
 {
-	import EXIT.starlingiso.interactcontroller.MouseInteractController;
+	import com.oishigroup.interactivemanager.MouseInteractManager;
 
 	public class MainGameMobile extends MainGame
 	{
 		public function MainGameMobile()
 		{
-			super(new MouseInteractController());
+			super(new MouseInteractManager());
 		}
 	}
 }
