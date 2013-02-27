@@ -4,12 +4,15 @@ package
 	import com.oishigroup.MainGameWeb;
 	import com.oishigroup.metadata.MetaData;
 	
-	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	public class main extends MainApp
+	import starling.events.Event;
+	
+	import tomorrowart.debug.DebugView;
+	
+	public class HayOishi_Web extends MainApp
 	{
-		public function main()
+		public function HayOishi_Web()
 		{
 			stage.addEventListener(Event.RESIZE,resized);
 			MetaData.isDebug = true;
