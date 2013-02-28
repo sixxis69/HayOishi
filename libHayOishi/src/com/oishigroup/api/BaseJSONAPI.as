@@ -25,12 +25,17 @@ package com.oishigroup.api
 
 		private var _rawData:*;
 
-		public function BaseJSONAPI(_url:String, _uv:URLVariables = null, _autoRefresh:Boolean = true)
+		public function BaseJSONAPI(_url:String, js:Object = null, _autoRefresh:Boolean = true)
 		{
+			
+			var msg:String = JSON.stringify(js);
+			var uv:URLVariables = new URLVariables();
+			uv.msg = msg;
+			
 			url = _url;
 			urlRequest = new URLRequest(_url);
 			urlRequest.method = URLRequestMethod.POST;
-			urlRequest.data = _uv;
+			urlRequest.data = uv;
 			autoRefresh = _autoRefresh;
 		}
 

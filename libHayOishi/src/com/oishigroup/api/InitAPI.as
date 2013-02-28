@@ -6,9 +6,9 @@ package com.oishigroup.api
 	
 	public class InitAPI extends BaseJSONAPI
 	{
-		public function InitAPI(_url:String, _uv:URLVariables=null, _autoRefresh:Boolean=true)
+		public function InitAPI(js:Object, _autoRefresh:Boolean=true)
 		{
-			super(_url, _uv, _autoRefresh);
+			super(ConfigPath.INIT,js,_autoRefresh);
 		}
 	}
 }

@@ -1,23 +1,32 @@
 package tomorrowart.debug
 {
-	import com.oishigroup.api.ConfigPath;
-	import com.oishigroup.api.InitAPI;
+	import feathers.controls.ScreenNavigator;
+	import feathers.controls.ScreenNavigatorItem;
+	import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
+	import feathers.themes.AeonDesktopTheme;
+	import feathers.themes.MetalWorksMobileTheme;
 	
-	import flash.display.BitmapData;
-	import flash.net.URLRequest;
-	import flash.net.URLVariables;
-	
-	import starling.display.Button;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.text.TextField;
-	import starling.textures.Texture;
 	
-	
+	import tomorrowart.debug.data.UserModel;
+	import tomorrowart.debug.screen.InitResponseScreen;
+	import tomorrowart.debug.screen.InitScreen;
+	import tomorrowart.debug.screen.MainMenuScreen;
 	
 	public class DebugView extends Sprite
 	{
-		private var initBt:Button;
+		public static const STAT_MARGIN:int			= 60;
+		
+		private static const MAIN_MENU:String		= "mainMenu";
+		private static const INIT:String			= "init";
+		private static const INIT_RESULT:String		= "initResult";
+		
+		
+//		private var _theme:MetalWorksMobileTheme;
+		private var _theme:AeonDesktopTheme;
+		private var _navigator:ScreenNavigator;
+		private var _transitionManager:ScreenSlidingStackTransitionManager;
 		
 		public function DebugView()
 		{
@@ -26,40 +35,42 @@ package tomorrowart.debug
 		
 		private function initView(e:Event):void
 		{
-			var bmd:BitmapData = new BitmapData(100,100,false,0xff0000);
-			initBt = new Button(Texture.fromBitmapData(bmd),'init');
-			initBt.addEventListener(Event.TRIGGERED,onTrig);
-			this.addChild(initBt);
-			initBt.x = 100;
-		}
-		
-		private function onTrig(e:Event):void
-		{
-			var js:Object = new Object();
+			this.removeEventListener(Event.ADDED_TO_STAGE,initView);
 			
-			js.uid = '123';
+			_theme = new AeonDesktopTheme(this.stage);
+			_navigator = new ScreenNavigator();
+			addChild(_navigator);
 			
-			var msg:String = JSON.stringify(js);
+			var userModel:UserModel = new UserModel();
 			
-			var vars:URLVariables = new URLVariables();
-			vars.msg = msg;
+			_navigator.addScreen(MAIN_MENU,new ScreenNavigatorItem(MainMenuScreen,
+				{
+					showInit: INIT
+				}));
 			
-			var req:URLRequest = new URLRequest();
-//			req.url = ConfigPath.INIT;
-//			req.data = vars;
-//			
-//			var api:InitAPI = new InitAPI(ConfigPath.SAVE_FARM_NAME,vars);
-//			api.load();
-//			api.signalComplete.add(onComplete);
-		}
-		
-		private function onComplete(value:Object):void
-		{
-			trace('onComplete: ' + value.data);
+			_navigator.addScreen(INIT,new ScreenNavigatorItem(InitScreen,
+				{
+					showInitResult: INIT_RESULT,
+					complete: MAIN_MENU
+				},
+				{
+					userData: userModel
+				}));
 			
-			var tf:TextField = new TextField(300,300,'');
-			tf.text = JSON.stringify(value);
-			this.addChild(tf);
+			_navigator.addScreen(INIT_RESULT,new ScreenNavigatorItem(InitResponseScreen,
+				{
+					complete: INIT
+				},
+				{
+					userData: userModel
+				}));
+			
+			
+			
+			_navigator.showScreen(MAIN_MENU);
+			
+			_transitionManager = new ScreenSlidingStackTransitionManager(_navigator);
+			_transitionManager.duration = 0.4;
 		}
 	}
 }
