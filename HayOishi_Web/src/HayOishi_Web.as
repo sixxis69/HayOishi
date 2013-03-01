@@ -7,13 +7,17 @@ package
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	public class main extends MainApp
+	import tomorrowart.debug.DebugView;
+	
+	public class HayOishi_Web extends MainApp
 	{
-		public function main()
+		public function HayOishi_Web()
 		{
 			stage.addEventListener(Event.RESIZE,resized);
 			MetaData.isDebug = true;
-			initApp(MainGameWeb);
+//			initApp(MainGameWeb);
+			
+			initApp(DebugView);
 		}
 		
 		protected function resized(event:Event):void
