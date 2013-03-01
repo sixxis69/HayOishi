@@ -11,9 +11,9 @@ package tomorrowart.debug.screen
 	import tomorrowart.debug.DebugView;
 	import tomorrowart.debug.data.UserModel;
 	
-	public class InitResponseScreen extends Screen
+	public class ResponseScreen extends Screen
 	{
-		public function InitResponseScreen()
+		public function ResponseScreen()
 		{
 			super();
 		}
@@ -27,7 +27,7 @@ package tomorrowart.debug.screen
 		override protected function initialize():void
 		{
 			_header = new Header();
-			_header.title = "Init Response";
+			_header.title = "Response";
 			this.addChild(_header);
 			
 			_backButton = new Button();
@@ -61,6 +61,5 @@ package tomorrowart.debug.screen
 		{
 			this.dispatchEventWith(Event.COMPLETE);
 		}
-		
 	}
 }

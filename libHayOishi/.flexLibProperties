@@ -19,6 +19,10 @@
     <classEntry path="com.oishigroup.view.CountDownPopupView"/>
     <classEntry path="com.oishigroup.building.BaseSkinSprite"/>
     <classEntry path="com.oishigroup.building.BaseSkinImage"/>
+    <classEntry path="tomorrowart.debug.screen.api.GetFriendsScreen"/>
+    <classEntry path="tomorrowart.debug.screen.api.TemplateAPIScreen"/>
+    <classEntry path="tomorrowart.debug.screen.api.SaveFarmNameScreen"/>
+    <classEntry path="tomorrowart.debug.screen.api.UpdateFieldsScreen"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

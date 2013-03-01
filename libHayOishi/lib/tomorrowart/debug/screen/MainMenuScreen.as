@@ -12,13 +12,14 @@ package tomorrowart.debug.screen
 	
 	import tomorrowart.debug.DebugView;
 	
-	[Event(name="showInit",type="starling.events.Event")]
-	
 	public class MainMenuScreen extends Screen
 	{
-		public static const SHOW_MENU:String		= "showMenu";
-		public static const SHOW_INIT:String		= "showInit";
-		public static const SHOW_INIT_RESULT:String	= "showInitResult";
+		public static const SHOW_RESULT:String					= "showResult";
+		public static const SHOW_MENU:String					= "showMenu";
+		public static const SHOW_INIT:String					= "showInit";
+		public static const SHOW_GET_FRIENDS:String 			= "showGetFriends";
+		public static const SHOW_SAVE_FARM_NAME:String			= "showSaveFarmName";
+		public static const SHOW_UPDATE_FIELD:String			= "showUpdateField";
 		
 		public function MainMenuScreen()
 		{
@@ -38,7 +39,10 @@ package tomorrowart.debug.screen
 	
 			_list.dataProvider = new ListCollection(
 				[
-					{label:"init.php", event:SHOW_INIT}
+					{label:"init.php", event:SHOW_INIT},
+					{label:"getFriends.php", event:SHOW_GET_FRIENDS},
+					{label:"saveFarmName.php", event:SHOW_SAVE_FARM_NAME},
+					{label:"updateFields.php", event:SHOW_UPDATE_FIELD}
 				]);
 			
 			_list.itemRendererProperties.labelField = "label";
